@@ -1,166 +1,148 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Montserrat,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
+    background:transparent;
+    font-family:'Montserrat',sans-serif;
+}
 
-background:transparent;
+.countdown{
+
+    width:100%;
+    background:transparent;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:10px 5px;
 
 }
 
-.barra{
+.countdown-container{
 
-background:linear-gradient(90deg,#8e0000,#a40000,#7b0000);
+    width:100%;
+    max-width:900px;
 
-padding:18px 35px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:45px;
-
-color:white;
-
-flex-wrap:wrap;
-
-}
-
-.titulo{
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-font-weight:700;
-
-font-size:22px;
-
-text-transform:uppercase;
-
-}
-
-.icono{
-
-font-size:38px;
-
-}
-
-.contador{
-
-display:flex;
-
-gap:40px;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
 
 }
 
 .item{
 
-text-align:center;
-
-position:relative;
-
-padding:0 20px;
+    flex:1;
+    text-align:center;
+    position:relative;
+    padding:5px 10px;
 
 }
 
 .item:not(:last-child)::after{
 
-content:"";
+    content:"";
 
-position:absolute;
+    position:absolute;
 
-right:-20px;
+    right:0;
 
-top:5px;
+    top:10%;
 
-height:65px;
+    width:1px;
 
-width:1px;
+    height:80%;
 
-background:rgba(255,255,255,.25);
-
-}
-
-.numero{
-
-font-size:64px;
-
-font-weight:800;
-
-color:#f5c86d;
-
-line-height:1;
-
-text-shadow:0 0 10px rgba(255,220,140,.4);
+    background:rgba(255,255,255,.35);
 
 }
 
-.texto{
+.number{
 
-margin-top:8px;
+    font-size:60px;
+    font-weight:800;
+    color:#D9A441;
+    line-height:1;
 
-font-size:14px;
+    text-shadow:
+    0 0 6px rgba(255,215,120,.25);
 
-letter-spacing:2px;
-
-font-weight:600;
-
-color:white;
-
-}
-
-@media(max-width:900px){
-
-.barra{
-
-padding:25px;
-
-gap:25px;
+    transition:.3s;
 
 }
 
-.titulo{
+.label{
 
-width:100%;
+    margin-top:8px;
 
-justify-content:center;
+    color:#FFFFFF;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    letter-spacing:2px;
 
 }
 
-.numero{
+/*************** TABLET ***************/
+
+@media(max-width:992px){
+
+.number{
 
 font-size:46px;
 
 }
 
-.item{
+.label{
 
-padding:0 12px;
+font-size:13px;
 
 }
 
-.contador{
+}
 
-gap:15px;
+/*************** CELULAR ***************/
+
+@media(max-width:640px){
+
+.countdown{
+
+padding:5px;
+
+}
+
+.number{
+
+font-size:34px;
+
+}
+
+.label{
+
+font-size:11px;
+
+letter-spacing:1px;
+
+}
+
+.item{
+
+padding:4px;
 
 }
 
@@ -172,76 +154,62 @@ gap:15px;
 
 <body>
 
-<div class="barra">
+<section class="countdown">
 
-<div class="titulo">
-
-<div class="icono">⏱</div>
-
-<div>
-
-FALTAN PARA EL<br>
-
-CONGRESO
-
-</div>
-
-</div>
-
-<div class="contador">
+<div class="countdown-container">
 
 <div class="item">
 
-<div class="numero" id="dias">00</div>
+<div id="dias" class="number">00</div>
 
-<div class="texto">DÍAS</div>
+<div class="label">DÍAS</div>
 
 </div>
 
 <div class="item">
 
-<div class="numero" id="horas">00</div>
+<div id="horas" class="number">00</div>
 
-<div class="texto">HORAS</div>
-
-</div>
-
-<div class="item">
-
-<div class="numero" id="minutos">00</div>
-
-<div class="texto">MINUTOS</div>
+<div class="label">HORAS</div>
 
 </div>
 
 <div class="item">
 
-<div class="numero" id="segundos">00</div>
+<div id="minutos" class="number">00</div>
 
-<div class="texto">SEGUNDOS</div>
+<div class="label">MINUTOS</div>
+
+</div>
+
+<div class="item">
+
+<div id="segundos" class="number">00</div>
+
+<div class="label">SEGUNDOS</div>
 
 </div>
 
 </div>
 
-</div>
+</section>
 
 <script>
 
-const fechaEvento = new Date("August 12, 2026 08:30:00").getTime();
+const fechaEvento = new Date("2026-08-12T08:30:00").getTime();
 
 function actualizarContador(){
 
 const ahora = new Date().getTime();
 
-const diferencia = fechaEvento-ahora;
+const diferencia = fechaEvento - ahora;
 
-if(diferencia<=0){
+if(diferencia <= 0){
 
-document.getElementById("dias").innerHTML="00";
-document.getElementById("horas").innerHTML="00";
-document.getElementById("minutos").innerHTML="00";
-document.getElementById("segundos").innerHTML="00";
+document.getElementById("dias").textContent="00";
+document.getElementById("horas").textContent="00";
+document.getElementById("minutos").textContent="00";
+document.getElementById("segundos").textContent="00";
 
 return;
 
@@ -255,13 +223,13 @@ const minutos=Math.floor((diferencia%(1000*60*60))/(1000*60));
 
 const segundos=Math.floor((diferencia%(1000*60))/1000);
 
-document.getElementById("dias").innerHTML=String(dias).padStart(2,"0");
+document.getElementById("dias").textContent=String(dias).padStart(2,"0");
 
-document.getElementById("horas").innerHTML=String(horas).padStart(2,"0");
+document.getElementById("horas").textContent=String(horas).padStart(2,"0");
 
-document.getElementById("minutos").innerHTML=String(minutos).padStart(2,"0");
+document.getElementById("minutos").textContent=String(minutos).padStart(2,"0");
 
-document.getElementById("segundos").innerHTML=String(segundos).padStart(2,"0");
+document.getElementById("segundos").textContent=String(segundos).padStart(2,"0");
 
 }
 
