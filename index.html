@@ -1,95 +1,273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<title>Cuenta regresiva</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Montserrat,sans-serif;
+}
+
 body{
-    margin:0;
-    background:transparent;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    font-family:Arial, Helvetica, sans-serif;
+
+background:transparent;
+
+}
+
+.barra{
+
+background:linear-gradient(90deg,#8e0000,#a40000,#7b0000);
+
+padding:18px 35px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:45px;
+
+color:white;
+
+flex-wrap:wrap;
+
+}
+
+.titulo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+font-weight:700;
+
+font-size:22px;
+
+text-transform:uppercase;
+
+}
+
+.icono{
+
+font-size:38px;
+
 }
 
 .contador{
-    display:flex;
-    gap:15px;
+
+display:flex;
+
+gap:40px;
+
 }
 
-.caja{
-    background:#7A0019;
-    color:white;
-    padding:15px;
-    border-radius:12px;
-    text-align:center;
-    min-width:90px;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
+.item{
+
+text-align:center;
+
+position:relative;
+
+padding:0 20px;
+
+}
+
+.item:not(:last-child)::after{
+
+content:"";
+
+position:absolute;
+
+right:-20px;
+
+top:5px;
+
+height:65px;
+
+width:1px;
+
+background:rgba(255,255,255,.25);
+
 }
 
 .numero{
-    font-size:42px;
-    font-weight:bold;
+
+font-size:64px;
+
+font-weight:800;
+
+color:#f5c86d;
+
+line-height:1;
+
+text-shadow:0 0 10px rgba(255,220,140,.4);
+
 }
 
 .texto{
-    font-size:15px;
-    text-transform:uppercase;
-    letter-spacing:1px;
+
+margin-top:8px;
+
+font-size:14px;
+
+letter-spacing:2px;
+
+font-weight:600;
+
+color:white;
+
 }
+
+@media(max-width:900px){
+
+.barra{
+
+padding:25px;
+
+gap:25px;
+
+}
+
+.titulo{
+
+width:100%;
+
+justify-content:center;
+
+}
+
+.numero{
+
+font-size:46px;
+
+}
+
+.item{
+
+padding:0 12px;
+
+}
+
+.contador{
+
+gap:15px;
+
+}
+
+}
+
 </style>
 
 </head>
+
 <body>
+
+<div class="barra">
+
+<div class="titulo">
+
+<div class="icono">⏱</div>
+
+<div>
+
+FALTAN PARA EL<br>
+
+CONGRESO
+
+</div>
+
+</div>
 
 <div class="contador">
 
-<div class="caja">
-<div id="dias" class="numero">00</div>
-<div class="texto">Días</div>
+<div class="item">
+
+<div class="numero" id="dias">00</div>
+
+<div class="texto">DÍAS</div>
+
 </div>
 
-<div class="caja">
-<div id="horas" class="numero">00</div>
-<div class="texto">Horas</div>
+<div class="item">
+
+<div class="numero" id="horas">00</div>
+
+<div class="texto">HORAS</div>
+
 </div>
 
-<div class="caja">
-<div id="minutos" class="numero">00</div>
-<div class="texto">Minutos</div>
+<div class="item">
+
+<div class="numero" id="minutos">00</div>
+
+<div class="texto">MINUTOS</div>
+
 </div>
 
-<div class="caja">
-<div id="segundos" class="numero">00</div>
-<div class="texto">Segundos</div>
+<div class="item">
+
+<div class="numero" id="segundos">00</div>
+
+<div class="texto">SEGUNDOS</div>
+
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-const fechaEvento = new Date("September 18, 2026 08:00:00").getTime();
+const fechaEvento = new Date("August 12, 2026 08:30:00").getTime();
 
-setInterval(function(){
+function actualizarContador(){
 
 const ahora = new Date().getTime();
 
-const distancia = fechaEvento - ahora;
+const diferencia = fechaEvento-ahora;
 
-const dias = Math.floor(distancia/(1000*60*60*24));
-const horas = Math.floor((distancia%(1000*60*60*24))/(1000*60*60));
-const minutos = Math.floor((distancia%(1000*60*60))/(1000*60));
-const segundos = Math.floor((distancia%(1000*60))/1000);
+if(diferencia<=0){
 
-document.getElementById("dias").innerHTML=dias;
-document.getElementById("horas").innerHTML=horas;
-document.getElementById("minutos").innerHTML=minutos;
-document.getElementById("segundos").innerHTML=segundos;
+document.getElementById("dias").innerHTML="00";
+document.getElementById("horas").innerHTML="00";
+document.getElementById("minutos").innerHTML="00";
+document.getElementById("segundos").innerHTML="00";
 
-},1000);
+return;
+
+}
+
+const dias=Math.floor(diferencia/(1000*60*60*24));
+
+const horas=Math.floor((diferencia%(1000*60*60*24))/(1000*60*60));
+
+const minutos=Math.floor((diferencia%(1000*60*60))/(1000*60));
+
+const segundos=Math.floor((diferencia%(1000*60))/1000);
+
+document.getElementById("dias").innerHTML=String(dias).padStart(2,"0");
+
+document.getElementById("horas").innerHTML=String(horas).padStart(2,"0");
+
+document.getElementById("minutos").innerHTML=String(minutos).padStart(2,"0");
+
+document.getElementById("segundos").innerHTML=String(segundos).padStart(2,"0");
+
+}
+
+actualizarContador();
+
+setInterval(actualizarContador,1000);
 
 </script>
 
