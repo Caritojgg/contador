@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cuenta regresiva</title>
+
+<style>
+body{
+    margin:0;
+    background:transparent;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.contador{
+    display:flex;
+    gap:15px;
+}
+
+.caja{
+    background:#7A0019;
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    min-width:90px;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+.numero{
+    font-size:42px;
+    font-weight:bold;
+}
+
+.texto{
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="contador">
+
+<div class="caja">
+<div id="dias" class="numero">00</div>
+<div class="texto">Días</div>
+</div>
+
+<div class="caja">
+<div id="horas" class="numero">00</div>
+<div class="texto">Horas</div>
+</div>
+
+<div class="caja">
+<div id="minutos" class="numero">00</div>
+<div class="texto">Minutos</div>
+</div>
+
+<div class="caja">
+<div id="segundos" class="numero">00</div>
+<div class="texto">Segundos</div>
+</div>
+
+</div>
+
+<script>
+
+const fechaEvento = new Date("September 18, 2026 08:00:00").getTime();
+
+setInterval(function(){
+
+const ahora = new Date().getTime();
+
+const distancia = fechaEvento - ahora;
+
+const dias = Math.floor(distancia/(1000*60*60*24));
+const horas = Math.floor((distancia%(1000*60*60*24))/(1000*60*60));
+const minutos = Math.floor((distancia%(1000*60*60))/(1000*60));
+const segundos = Math.floor((distancia%(1000*60))/1000);
+
+document.getElementById("dias").innerHTML=dias;
+document.getElementById("horas").innerHTML=horas;
+document.getElementById("minutos").innerHTML=minutos;
+document.getElementById("segundos").innerHTML=segundos;
+
+},1000);
+
+</script>
+
+</body>
+</html>
