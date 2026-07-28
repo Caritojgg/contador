@@ -1,154 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
 
-<style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <title>Contador | V Congreso Internacional de Flagrancia</title>
 
-body{
-    background:transparent;
-    font-family:'Montserrat',sans-serif;
-}
+    <meta name="description" content="Cuenta regresiva para el V Congreso Internacional de Flagrancia">
 
-.countdown{
+    <!-- Tipografía -->
 
-    width:100%;
-    background:transparent;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    padding:10px 5px;
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-}
+    <!-- Hoja de estilos -->
 
-.countdown-container{
-
-    width:100%;
-    max-width:900px;
-
-    display:flex;
-    justify-content:space-evenly;
-    align-items:center;
-
-}
-
-.item{
-
-    flex:1;
-    text-align:center;
-    position:relative;
-    padding:5px 10px;
-
-}
-
-.item:not(:last-child)::after{
-
-    content:"";
-
-    position:absolute;
-
-    right:0;
-
-    top:10%;
-
-    width:1px;
-
-    height:80%;
-
-    background:rgba(255,255,255,.35);
-
-}
-
-.number{
-
-    font-size:60px;
-    font-weight:800;
-    color:#D9A441;
-    line-height:1;
-
-    text-shadow:
-    0 0 6px rgba(255,215,120,.25);
-
-    transition:.3s;
-
-}
-
-.label{
-
-    margin-top:8px;
-
-    color:#FFFFFF;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    letter-spacing:2px;
-
-}
-
-/*************** TABLET ***************/
-
-@media(max-width:992px){
-
-.number{
-
-font-size:46px;
-
-}
-
-.label{
-
-font-size:13px;
-
-}
-
-}
-
-/*************** CELULAR ***************/
-
-@media(max-width:640px){
-
-.countdown{
-
-padding:5px;
-
-}
-
-.number{
-
-font-size:34px;
-
-}
-
-.label{
-
-font-size:11px;
-
-letter-spacing:1px;
-
-}
-
-.item{
-
-padding:4px;
-
-}
-
-}
-
-</style>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -156,88 +29,94 @@ padding:4px;
 
 <section class="countdown">
 
-<div class="countdown-container">
+    <div class="countdown-container">
 
-<div class="item">
+        <div class="countdown-header">
 
-<div id="dias" class="number">00</div>
+            <span class="subtitle">
+                V Congreso Internacional de Flagrancia
+            </span>
 
-<div class="label">DÍAS</div>
+            <h2>
+                Faltan
+            </h2>
 
-</div>
+        </div>
 
-<div class="item">
+        <div class="countdown-grid">
 
-<div id="horas" class="number">00</div>
+            <!-- Días -->
 
-<div class="label">HORAS</div>
+            <div class="card">
 
-</div>
+                <div id="dias" class="number">
+                    00
+                </div>
 
-<div class="item">
+                <div class="label">
+                    DÍAS
+                </div>
 
-<div id="minutos" class="number">00</div>
+            </div>
 
-<div class="label">MINUTOS</div>
+            <!-- Horas -->
 
-</div>
+            <div class="card">
 
-<div class="item">
+                <div id="horas" class="number">
+                    00
+                </div>
 
-<div id="segundos" class="number">00</div>
+                <div class="label">
+                    HORAS
+                </div>
 
-<div class="label">SEGUNDOS</div>
+            </div>
 
-</div>
+            <!-- Minutos -->
 
-</div>
+            <div class="card">
+
+                <div id="minutos" class="number">
+                    00
+                </div>
+
+                <div class="label">
+                    MINUTOS
+                </div>
+
+            </div>
+
+            <!-- Segundos -->
+
+            <div class="card">
+
+                <div id="segundos" class="number">
+                    00
+                </div>
+
+                <div class="label">
+                    SEGUNDOS
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="countdown-footer">
+
+            <span>
+                12 • 13 • 14 de agosto de 2026
+            </span>
+
+        </div>
+
+    </div>
 
 </section>
 
-<script>
-
-const fechaEvento = new Date("2026-08-12T08:30:00").getTime();
-
-function actualizarContador(){
-
-const ahora = new Date().getTime();
-
-const diferencia = fechaEvento - ahora;
-
-if(diferencia <= 0){
-
-document.getElementById("dias").textContent="00";
-document.getElementById("horas").textContent="00";
-document.getElementById("minutos").textContent="00";
-document.getElementById("segundos").textContent="00";
-
-return;
-
-}
-
-const dias=Math.floor(diferencia/(1000*60*60*24));
-
-const horas=Math.floor((diferencia%(1000*60*60*24))/(1000*60*60));
-
-const minutos=Math.floor((diferencia%(1000*60*60))/(1000*60));
-
-const segundos=Math.floor((diferencia%(1000*60))/1000);
-
-document.getElementById("dias").textContent=String(dias).padStart(2,"0");
-
-document.getElementById("horas").textContent=String(horas).padStart(2,"0");
-
-document.getElementById("minutos").textContent=String(minutos).padStart(2,"0");
-
-document.getElementById("segundos").textContent=String(segundos).padStart(2,"0");
-
-}
-
-actualizarContador();
-
-setInterval(actualizarContador,1000);
-
-</script>
+<script src="script.js"></script>
 
 </body>
+
 </html>
